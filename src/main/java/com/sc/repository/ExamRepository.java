@@ -1,0 +1,30 @@
+package com.sc.repository;
+
+import com.sc.entity.ExamEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface ExamRepository extends JpaRepository<ExamEntity, Long> {
+
+    Optional<ExamEntity> findByExamCode(String examCode);
+
+    List<ExamEntity> findByClassEntity_ClassId(Long classId);
+
+    List<ExamEntity> findByClassEntity_ClassIdAndSection(Long classId, String section);
+
+    List<ExamEntity> findByAcademicYear(String academicYear);
+
+    List<ExamEntity> findByStatus(String status);
+
+    @Query("SELECT e FROM ExamEntity e WHERE e.startDate >= :startDate AND e.endDate <= :endDate")
+    List<ExamEntity> findByDateRange(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+
+    boolean existsByExamCode(String examCode);
+}

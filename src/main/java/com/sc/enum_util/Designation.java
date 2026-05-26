@@ -1,0 +1,6 @@
+package com.sc.enum_util;
+
+public enum Designation {
+    PRINCIPAL, VICE_PRINCIPAL, HOD, SENIOR_TEACHER, TEACHER,
+    ASSISTANT_TEACHER, TRAINEE, LIBRARIAN, COUNSELOR, OTHER
+}
